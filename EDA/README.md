@@ -80,11 +80,11 @@ Because images were captured at varying distances, the apparent size of the reti
 
 This ensures that anatomical structures (the optic disc, blood vessels, lesion regions) appear at a consistent scale across all images, regardless of the original imaging distance.
 
-**Stage III — Square Padding**
+- **Stage III — Square Padding**
 
 After radius scaling, images were placed onto a square canvas with a neutral grey (128) background. This step preserves the original proportions of the retina — avoiding the distortion that direct rectangular-to-square resizing would introduce — while producing a uniform square input size ready for the neural network.
 
-**Stage IV — Ben Graham Contrast Enhancement**
+- **Stage IV — Ben Graham Contrast Enhancement**
 
 The dataset included images with varying visual quality — haze, uneven illumination, and colour inconsistencies that make subtle features like microaneurysms and small haemorrhages difficult to see. Ben Graham's contrast enhancement method was applied:
 
@@ -98,19 +98,20 @@ After contrast enhancement, some edge artifacts became more pronounced at the im
 
 Preprocessing progression:
 
-Raw Image
-    ↓
-Automated Cropping (remove black borders)
-    ↓
-Radius Scaling (standardise retinal size to 384px radius)
-    ↓
-Square Padding (grey canvas, preserve aspect ratio)
-    ↓
-Ben Graham Contrast Enhancement (improve lesion visibility)
-    ↓
-Circular Masking (focus on retinal region only)
-    ↓
+Raw Image  
+↓  
+Automated Cropping (removes black borders)  
+↓  
+Radius Scaling (standardises retinal size to 384px radius)  
+↓  
+Square Padding (grey canvas, preserves aspect ratio)  
+↓  
+Ben Graham Contrast Enhancement (improves lesion visibility)  
+↓  
+Circular Masking (focuses on retinal region only)  
+↓  
 Preprocessed Image (ready for model training)
+```
 
 **Data Splitting**
 
