@@ -16,7 +16,13 @@ Before any model was built, a thorough Exploratory Data Analysis (EDA) was condu
 
 The first and most critical finding from the EDA is the severe class imbalance in the dataset. The bar chart analysis revealed that Grade 0 (healthy) accounts for the overwhelming majority of images, while the clinically important severe and proliferative grades are represented by far fewer samples.
 
-
+| Grade | Description   | Count               |
+| ----- | ------------- | ------------------- |
+| 0     | Healthy       | Majority (~73%)     |
+| 1     | Mild          | Small minority      |
+| 2     | Moderate      | Moderate minority   |
+| 3     | Severe        | Very small minority |
+| 4     | Proliferative | Smallest group      |
 
 This imbalance is not just a statistical concern — it has direct clinical implications. A model that ignores the imbalance would learn to predict healthy for most images and achieve superficially high accuracy while failing to detect the disease cases that matter most. This finding motivated the use of weighted sampling, Focal Loss, and Mixup augmentation in both models.
 
@@ -65,7 +71,7 @@ These findings made it clear that a structured normalisation pipeline was essent
 
 The EDA findings motivated a five-stage preprocessing pipeline designed to standardise image quality, size, and retinal scale before any model training.
 
-**1. Image Preprocessing Pipeline**
+**Image Preprocessing Pipeline**
 
 - **Stage I — Automated Cropping and Noise Removal**
 
@@ -98,6 +104,7 @@ After contrast enhancement, some edge artifacts became more pronounced at the im
 
 Preprocessing progression:
 
+```
 Raw Image  
 ↓  
 Automated Cropping (removes black borders)  
@@ -150,6 +157,7 @@ After augmentation, all images were:
 
 - Converted to PyTorch tensors — pixel values scaled from [0, 255] to [0, 1]
 - Normalised using ImageNet statistics — mean [0.485, 0.456, 0.406] and std [0.229, 0.224, 0.225] per channel
+
 
 ImageNet normalisation is applied even to RetinalNet (trained from scratch) because the statistics provide a reasonable and consistent input distribution given that retinal images are captured under visible-light conditions similar to natural photographs.
 
