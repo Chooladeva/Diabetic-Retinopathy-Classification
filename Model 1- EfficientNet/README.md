@@ -3,7 +3,8 @@
 ### Overview
 
 This module implements an automated diabetic retinopathy (DR) grading pipeline using EfficientNet-B4 with transfer learning. Given a retinal fundus photograph, the model classifies it into one of five severity grades:
-0No DR (Healthy)
+
+- 0- No DR (Healthy)
 - 1- Mild DR
 - 2- Moderate DR
 - 3- Severe DR
