@@ -43,7 +43,7 @@ Total Parameters: ~11 million (all trainable from epoch 1)
 
 ### Key Architectural Components
 
-#### Residual Blocks (ResBlock)
+- #### Residual Blocks (ResBlock)
 
 The core building unit of RetinalNet. Each block contains two 3×3 convolutions with a skip connection that adds the block's input directly to its output:
 
@@ -51,7 +51,7 @@ Input → Conv3×3 → BN → ReLU → Conv3×3 → BN → (+Input) → ReLU
 
 Skip connections solve the vanishing gradient problem — gradients can flow directly through the skip path without passing through convolution layers, allowing the network to train stably despite its depth. When spatial dimensions or channel counts change, a 1×1 projection convolution aligns the skip connection dimensions.
 
-#### Squeeze-and-Excitation Blocks (SEBlock)
+- #### Squeeze-and-Excitation Blocks (SEBlock)
 
 Applied in Stages 2, 3, and 4. SE blocks add channel-wise attention — they learn which feature maps are most important for a given input and rescale them accordingly:
 
@@ -61,7 +61,7 @@ For retinal images this is particularly valuable. Lesion signals such as haemorr
 
 Stage 1 does not use SE attention — early-stage features (basic edges and textures) are not yet semantically rich enough to benefit from channel re-weighting.
 
-#### Classification Head
+- #### Classification Head
 
 RetinalNet uses a two-layer MLP head rather than a single linear layer:
 
@@ -69,7 +69,7 @@ Flatten → Dropout(0.5) → Linear(512→256) → BatchNorm1d → ReLU → Drop
 
 The two dropout layers at different strengths (0.5 then 0.3) provide aggressive regularisation at two levels of abstraction. The BatchNorm between the linear layers stabilises the intermediate 256-dimensional representation, which is especially important when training on a heavily imbalanced dataset where minority class examples are seen repeatedly.
 
-#### Kaiming Weight Initialisation
+- #### Kaiming Weight Initialisation
 
 All convolutional and linear layers are initialised using Kaiming Normal initialisation, specifically designed for ReLU networks. This keeps activation variance stable across layers from the very first forward pass, preventing gradient explosion or vanishing before any learning occurs.
 
