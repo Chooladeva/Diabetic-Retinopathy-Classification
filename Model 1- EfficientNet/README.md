@@ -121,17 +121,22 @@ A QWK of 0 indicates performance no better than random chance. A score of 1.0 in
 
 The training loop saves the complete training state after every epoch:
 
-torch.save({
-    'epoch': epoch,
-    'model_state_dict': model.state_dict(),
-    'optimizer_state_dict': optimizer.state_dict(),
-    'scheduler_state_dict': scheduler.state_dict(),
-    'scaler_state_dict': scaler.state_dict(),
-    'test_kappa': test_kappa,
-    'best_kappa': best_kappa,
-    'backbone_unfrozen': backbone_unfrozen,
-    'early_stopping_state': early_stopping_state,
-}, CHECKPOINT_PATH)
+```python
+torch.save(
+    {
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'scheduler_state_dict': scheduler.state_dict(),
+        'scaler_state_dict': scaler.state_dict(),
+        'test_kappa': test_kappa,
+        'best_kappa': best_kappa,
+        'backbone_unfrozen': backbone_unfrozen,
+        'early_stopping_state': early_stopping_state,
+    },
+    CHECKPOINT_PATH
+)
+```
 
 If a checkpoint exists at startup, training resumes exactly where it left off — including the epoch count, best QWK, early stopping patience counter, and whether the backbone has already been unfrozen. This makes the pipeline robust to session interruptions on cloud compute platforms such as Kaggle.
 
