@@ -1,3 +1,7 @@
+> **Note:** GitHub often fails to render large Jupyter Notebooks. To view the full project with all plots and training results, please use the DagsHub link below:
+>
+> [![View on DagsHub](https://dagshub.com/static/badge.svg)]([https://dagshub.com/YOUR_USERNAME/YOUR_REPO_NAME](https://dagshub.com/Chooladeva/Diabetic-Retinopathy-Classification/src/main/Model%201-%20EfficientNet))
+
 ## Diabetic Retinopathy Grading — EfficientNet-B4
 
 ### Overview
